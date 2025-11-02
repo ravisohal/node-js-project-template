@@ -1,9 +1,8 @@
 import cors from "cors";
-import { env } from './config/env.js';
-import { logger } from './utils/logger.js';
 import app from './app.js';
 import routes from './routes/index.js';
-import { startTTSCleanup, stopTTSCleanup } from './services/cleanup.tts.cache.service.js';
+import { env } from './configs/env.js';
+import { logger } from './utils/logger.js';
 
 (async function main() {
 
@@ -26,19 +25,8 @@ import { startTTSCleanup, stopTTSCleanup } from './services/cleanup.tts.cache.se
 
     const server = app.listen(env.port, () => logger.info(`✅ SmartBiz AI Labs Server running on port ${env.port}`));
 
-    // Start TTS cleanup service
-    try {
-        await startTTSCleanup();
-        logger.info('TTS cleanup service started successfully');
-    } catch (err) {
-        logger.error('Failed to start TTS cleanup service:', err);
-        process.exit(1);
-    }
-
     const gracefulShutdown = async (signal) => {
         logger.info(`${signal} received. Starting graceful shutdown...`);
-
-        await stopTTSCleanup();
 
         // Close server
         server.close(() => {

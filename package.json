@@ -3,10 +3,18 @@
   "version": "1.0.0",
   "description": "Node JS Project Title",
   "main": "server.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
-  },
   "author": "Developer or Organization Name",
-  "license": "GPL-3.0-or-later"
+  "license": "GPL-3.0-or-later",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "nodemon server.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.3",
+    "express": "^4.21.2"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.10"
+  }
 }
